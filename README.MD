@@ -9,7 +9,7 @@ Add a scele.cs.ui.ac.id assignment to google calendar in one click!*.
 
 <li>Enable Developer Mode and click <strong>Load unpacked extension</strong> button and select the folder</li>
 
-![Screenshot](./img/3.png)
+![Screenshot](./img/3.png)<br>
 ![Screenshot](./img/4.png)
 
 <li>Done.</li>
