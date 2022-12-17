@@ -2,7 +2,7 @@
     "name": "Scele Assigment To Google Calendar",
     "version": "1.0",
     "description": "Automatically add assigment to Google calendar",
-    "icons": { "16": "newtab_search16.png", "48": "newtab_search48.png", "128": "newtab_search128.png" },
+    "icons": { "16": "sgc16.png", "48": "sgc48.png", "128": "sgc128.png" },
     "permissions": ["tabs", "contextMenus", "scripting"],
     "host_permissions": [
         "https://scele.cs.ui.ac.id/",
@@ -11,7 +11,7 @@
     "background": {
         "service_worker": "background.js"
       },
-    "action": {"default_icon": "newtab_search16.png"},
+    "action": {"default_icon": "sgc16.png"},
     "content_scripts": [{
         "matches": ["<all_urls>"],
         "js":      ["content.js"]
