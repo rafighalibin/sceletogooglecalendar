@@ -1,6 +1,6 @@
 if (typeof init =='undefined') {
     const init = function() {
-        var scele = document.getElementsByClassName('submissionstatustable')[0]
+        var scele = document.getElementsByClassName('singlebutton')[0]
         var button = document.createElement("button");
         var text = document.createTextNode("Add this assigment to Google Calendar");  
         button.style.color = '#ffffff';
