@@ -10,6 +10,19 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   }
 });
 
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+  if (changeInfo.status == "complete") {
+    if (tab.title == "Jadwal Kelas Mata Kuliah - SIAK NG") {
+      chrome.scripting.executeScript({
+        files : ['detailMK.js'],
+        target : {tabId : tab.id}
+      });
+    }
+  }
+});
+
+
 // Context menu 
 // chrome.contextMenus.create({
 //   id: "Assignment",
