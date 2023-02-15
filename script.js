@@ -34,7 +34,7 @@ function fetchDataAssigment(){
   var subjectindexend = document.getElementsByTagName('span')[40].innerHTML.indexOf("(")
 
   let data={
-    subject : "["+abbreviation(document.getElementsByTagName('span')[40].innerHTML.slice(subjectindexstart+2,subjectindexend-1).replace(/-/g," ").split(" ")) + "] ",
+    subject : "["+abbreviation(document.getElementsByTagName('span')[28].innerHTML.slice(subjectindexstart+2,subjectindexend-1).replace(/-/g," ").split(" ")) + "] ",
     title : assigmentTitle(document.getElementsByTagName("h2")[0].innerHTML.split(" ")),
     dueDate : document.getElementsByClassName('cell c1 lastcol')[counter].innerHTML,
     url : location.href
@@ -44,12 +44,15 @@ function fetchDataAssigment(){
 
 function abbreviation(lst){
   // convert subject name to abbreviation and remove conjunction
+  console.log(lst)
   var res=""
   for (var i in lst){
     if (lst[i].length >0 && subjectFilter(lst[i]) == false ) {
       res+= lst[i][0]
     }  else{}
   }
+  console.log(res)
+
   return res.toUpperCase() 
 }
 
@@ -77,7 +80,7 @@ function titleFilter(str){
 
 function subjectFilter(str){
   // check if subject str is in the blacklist
-  let blacklist = ["genap", "gasal", "ganjil", "/", "untuk", "dan", "&" ]
+  let blacklist = ["genap", "gasal", "ganjil", "/", "untuk", "dan", "&", "reg", "(", ")", "." ]
   for (var i in blacklist){
     if (str.toLowerCase().includes(blacklist[i].toLowerCase())){
       return true
