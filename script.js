@@ -13,7 +13,7 @@ if (typeof init =='undefined') {
 }
 
 // TODO : 
-// improve query from page ()
+// improve query from page
 // Create add a quiz to calendar
 
 function url(str) {
@@ -30,11 +30,23 @@ function fetchDataAssigment(){
     }
   }
 
-  var subjectindexstart = document.getElementsByTagName('span')[40].innerHTML.indexOf("]")
-  var subjectindexend = document.getElementsByTagName('span')[40].innerHTML.indexOf("(")
+  var subjectCandidates = document.getElementsByClassName("breadcrumb")[0].children
+  var subjectSelected = null;
+  for (const element of subjectCandidates) {
+    if (subjectSelected == null) {
+      if (element.querySelector('[itemprop=title]') != null) {
+        subjectSelected = checkIfSubject(element.querySelector('[itemprop=title]').innerHTML)      
+      }
+    }else{
+      break;
+    }
+  }
+
+  var subjectindexstart = subjectSelected.indexOf("]")
+  var subjectindexend = subjectSelected.indexOf("(")
 
   let data={
-    subject : "["+abbreviation(document.getElementsByTagName('span')[28].innerHTML.slice(subjectindexstart+2,subjectindexend-1).replace(/-/g," ").split(" ")) + "] ",
+    subject : "["+abbreviation(subjectSelected.slice(subjectindexstart+2,subjectindexend-1).replace(/-/g," ").split(" ")) + "] ",
     title : assigmentTitle(document.getElementsByTagName("h2")[0].innerHTML.split(" ")),
     dueDate : document.getElementsByClassName('cell c1 lastcol')[counter].innerHTML,
     url : location.href
@@ -42,16 +54,27 @@ function fetchDataAssigment(){
   url(processData(data))
 }
 
+function checkIfSubject(e){
+  // check children, if span contains [REG] or [SI.REG] or? [IK.REG] return element 
+  // else return null
+  let toFind = ["[REG]", "[SI.REG]"]
+  for (var i in toFind){
+    if (e.toLowerCase().includes(toFind[i].toLowerCase())){
+      return e
+    }
+  }
+  return null;
+}
+
+
 function abbreviation(lst){
   // convert subject name to abbreviation and remove conjunction
-  console.log(lst)
   var res=""
   for (var i in lst){
     if (lst[i].length >0 && subjectFilter(lst[i]) == false ) {
       res+= lst[i][0]
     }  else{}
   }
-  console.log(res)
 
   return res.toUpperCase() 
 }
@@ -80,7 +103,8 @@ function titleFilter(str){
 
 function subjectFilter(str){
   // check if subject str is in the blacklist
-  let blacklist = ["genap", "gasal", "ganjil", "/", "untuk", "dan", "&", "reg", "(", ")", "." ]
+  let blacklist = ["genap", "gasal", "ganjil", "/", "untuk", "dan", "&", "reg", "(", ")"]
+  // note: Removed '.' from blacklist
   for (var i in blacklist){
     if (str.toLowerCase().includes(blacklist[i].toLowerCase())){
       return true
