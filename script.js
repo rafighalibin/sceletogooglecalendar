@@ -114,7 +114,7 @@ function subjectFilter(str){
 }
 
 function processData(data){
-  var url = "https://www.google.com/calendar/u/2/render?action=TEMPLATE"
+  var url = "https://www.google.com/calendar/u/0/render?action=TEMPLATE"
   var urlDate = processTime(data.dueDate)
   var urltitle = '&text=' + data.subject + data.title.replace(/ /g,'+')
   var urlDesc = '&details=' + data.url
